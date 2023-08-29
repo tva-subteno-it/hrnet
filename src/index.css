@@ -8,3 +8,8 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+
+body, html, #root{
+    min-height: 100vh;
+}
