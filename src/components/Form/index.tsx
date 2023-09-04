@@ -16,21 +16,21 @@ export default function Form() {
             }}/>
             </section>
             <section className={"px-[5vw]"}>
-                <Input id={"firstname"} placeholder={"John"} value={""} onChange={() => {}}/>
-                <Input id={"lastname"} placeholder={"Dupont"} value={""} onChange={() => {}}/>
-                <Input id={"birth"} label={"Date of birth"} type={"date"} placeholder={"01/01/2001"} value={""} onChange={() => {}}/>
-                <Input id={"start_date"} label={"Start date"} type={"date"} placeholder={"01/01/2001"} value={""} onChange={() => {}}/>
+                <Input id={"firstname"} placeholder={"John"}/>
+                <Input id={"lastname"} placeholder={"Dupont"}/>
+                <Input id={"birth"} label={"Date of birth"} type={"date"} placeholder={"01/01/2001"}/>
+                <Input id={"start_date"} label={"Start date"} type={"date"} placeholder={"01/01/2001"}/>
             </section>
             <FormGroup label={"Address"} className={"mt-14 mx-[5vw]"}>
                 <>
-                    <Input id={"address"} placeholder={"2 rue de la paix"} value={""} onChange={() => {}} groupClassName={"w-full"}/>
-                    <Input id={"city"} placeholder={"Paris"} value={""} onChange={() => {}} groupClassName={"w-full"}/>
-                    <Select id={"department"} placeholder={"Sales"} value={""} onSelect={() => {}} groupClassName={"w-full"} data={departments}/>
-                    <Input id={"zip"} label={"ZIP"} type={"text"} placeholder={"35242"} value={""} onChange={() => {}} groupClassName={"w-full"}/>
+                    <Input id={"address"} placeholder={"2 rue de la paix"} groupClassName={"w-full"}/>
+                    <Input id={"city"} placeholder={"Paris"} groupClassName={"w-full"}/>
+                    <Select label={"Department"} data={departments} placeholder={"Sales"}/>
+                    <Input id={"zip"} label={"ZIP"} type={"text"} placeholder={"35242"} groupClassName={"w-full"}/>
                 </>
             </FormGroup>
             <section className={"mt-14 px-[5vw]"}>
-                <Select id={"department"} placeholder={"Sales"} value={""} onSelect={() => {}} groupClassName={"w-full"} data={states}/>
+                <Select label={"States"} data={states} placeholder={"Alabama"}/>
             </section>
             <section className={"mt-20 mb-10 px-[5vw] w-full"}>
                 <Button type={"submit"} label={"Save"} onClick={() => {

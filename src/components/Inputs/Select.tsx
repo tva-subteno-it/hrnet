@@ -1,37 +1,28 @@
-import {InputProps} from "./Input.tsx";
+import DropDown from "../DropDown";
 
-interface SelectProps extends Omit<InputProps, 'type' | 'onChange'> {
+interface SelectProps {
+    label: string;
+    placeholder?: string;
     data: {
-        name: string;
+        id: string;
         value: string;
     }[];
-    onSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export default function Select({
-                                   id,
                                    label,
-                                   placeholder,
-                                   value,
-                                   onSelect,
-                                   groupClassName = "",
-                                   labelClassName = "",
-                                   inputClassName = "",
-                                   data
+                                   data,
+                                   placeholder
                                }: SelectProps) {
-    if (!label){
-        label = id.charAt(0).toUpperCase() + id.slice(1)
-    }
 
     return (
-        <div className={"flex flex-col mt-4 " + groupClassName}>
-            <label htmlFor={id} className={"text-sm font-pt mb-2 " + labelClassName}>{label}</label>
-            <select id={id} placeholder={placeholder} value={value} onSelect={onSelect}
-                   className={"border border-secondary/20 rounded-sm p-2 bg-primary/10 " + inputClassName}>
-                {data.map((item) => (
-                    <option key={item.value} value={item.value}>{item.name}</option>
-                ))}
-            </select>
-        </div>
+        <DropDown label={label} items={data} multiSelect={false} displayArrow={true}
+                  dropdownClass={"mt-4 w-full"}
+                  boxClass={"bg-[#eef0e5]"}
+                  boxStyle={{border: "1px solid rgba(40, 25, 14, 0.20)"}}
+                  headerClass={"text-[#000000]"}
+                  listClass={"bg-[#eef0e5] w-full"}
+                  placeholder={placeholder}
+        />
     )
 }
