@@ -3,11 +3,26 @@ import FormGroup from "../FormGroup";
 import {departments, states} from "../../constants";
 import Select from "../Inputs/Select.tsx";
 import Button from "../Button";
+import React, {useContext} from "react";
+import AppContext, {AppContextInterface} from "../../context";
 
 export default function Form() {
+    const {setShowModal} = useContext(AppContext) as AppContextInterface;
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log("Submitted")
+        const formData = new FormData(e.currentTarget);
+        const data = Object.fromEntries(formData.entries());
+        // add data to local storage
+        const oldData = JSON.parse(window.localStorage.getItem("employee") ?? "[]");
+        window.localStorage.setItem("employee", JSON.stringify([...oldData, data]));
+        setShowModal(true);
+    }
+
     return (
         <form action="" className={"bg-white w-[45vw] mx-auto pb-10"}
-        style={{boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)"}}>
+        style={{boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)"}} onSubmit={handleSubmit}>
             <section className={"bg-primary h-32 flex items-center justify-center shadow-md"}>
                 <h2 className={"text-xl font-playfair text-center text-white"}>Create Employee</h2>
             </section>

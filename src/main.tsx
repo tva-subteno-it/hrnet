@@ -4,9 +4,11 @@ import './index.css'
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Home from "./pages/Home.tsx";
 import DropDown from "./components/DropDown";
+import Root from "./components/Root";
 
 const router = createBrowserRouter([{
     path: '/',
+    element: <Root/>,
     errorElement: <div>404</div>,
     children: [
         {
@@ -41,6 +43,6 @@ const router = createBrowserRouter([{
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <RouterProvider router={router}/>
+            <RouterProvider router={router}/>
     </React.StrictMode>,
 )
