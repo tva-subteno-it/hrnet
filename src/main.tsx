@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Home from "./pages/Home.tsx";
+import DropDown from "./components/DropDown";
 
 const router = createBrowserRouter([{
     path: '/',
@@ -16,6 +17,24 @@ const router = createBrowserRouter([{
         {
             path: '/employee-list',
             element: <div>Employee List</div>,
+        },
+        {
+            path: '/dropdown',
+            element: <DropDown
+                label={"Test Label"}
+                placeholder={"Test Button"}
+                items={[
+                    {id: "1", value: "Item 1"},
+                    {id: "2", value: "Item 2"},
+                    {id: "3", value: "Item 3"},
+                    {id: "4", value: "Item 4"},
+                ]}
+                multiSelect={true}
+                boxClass={"bg-[#eef0e5] w-52"}
+                boxStyle={{border: "1px solid rgba(40, 25, 14, 0.20)"}}
+                headerClass={"text-[#00000066]"}
+                listClass={"bg-[#eef0e5] w-52"}
+            />,
         }
     ]
 }])
