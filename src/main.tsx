@@ -5,6 +5,7 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Home from "./pages/Home.tsx";
 import DropDown from "./components/DropDown";
 import Root from "./components/Root";
+import EmployeeList from "./pages/EmployeeList/EmployeeList.tsx";
 
 const router = createBrowserRouter([{
     path: '/',
@@ -18,7 +19,7 @@ const router = createBrowserRouter([{
         },
         {
             path: '/employee-list',
-            element: <div>Employee List</div>,
+            element: <EmployeeList/>,
         },
         {
             path: '/dropdown',

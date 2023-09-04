@@ -33,7 +33,7 @@ export default function Form() {
                 <Input id={"firstname"} placeholder={"John"}/>
                 <Input id={"lastname"} placeholder={"Dupont"}/>
                 <Input id={"birth"} label={"Date of birth"} type={"date"} placeholder={"01/01/2001"}/>
-                <Input id={"start_date"} label={"Start date"} type={"date"} placeholder={"01/01/2001"}/>
+                <Input id={"startDate"} label={"Start date"} type={"date"} placeholder={"01/01/2001"}/>
             </section>
             <FormGroup label={"Address"} className={"mt-14 mx-[5vw]"}>
                 <>
