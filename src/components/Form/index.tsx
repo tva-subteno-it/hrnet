@@ -27,8 +27,7 @@ export default function Form() {
                 <h2 className={"text-xl font-playfair text-center text-white"}>Create Employee</h2>
             </section>
             <section className={"mt-20 mb-10 px-[5vw] w-full"}>
-                <Button type={"link"} to={"employee-list"} label={"View Current Employee"} onClick={() => {
-            }}/>
+                <Button type={"link"} to={"employee-list"} label={"View Current Employee"} className={"hover:bg-black/5 transition"}/>
             </section>
             <section className={"px-[5vw]"}>
                 <Input id={"firstname"} placeholder={"John"}/>
@@ -40,16 +39,15 @@ export default function Form() {
                 <>
                     <Input id={"address"} placeholder={"2 rue de la paix"} groupClassName={"w-full"}/>
                     <Input id={"city"} placeholder={"Paris"} groupClassName={"w-full"}/>
-                    <Select label={"Department"} data={departments} placeholder={"Sales"}/>
+                    <Select id={"department"} label={"Department"} data={departments} placeholder={"Sales"}/>
                     <Input id={"zip"} label={"ZIP"} type={"text"} placeholder={"35242"} groupClassName={"w-full"}/>
                 </>
             </FormGroup>
             <section className={"mt-14 px-[5vw]"}>
-                <Select label={"States"} data={states} placeholder={"Alabama"}/>
+                <Select id={"state"} label={"States"} data={states} placeholder={"Alabama"} position={"top"}/>
             </section>
             <section className={"mt-20 mb-10 px-[5vw] w-full"}>
-                <Button type={"submit"} label={"Save"} onClick={() => {
-            }}/>
+                <Button type={"submit"} label={"Save"} className={"hover:filter hover:opacity-90 transition"}/>
             </section>
         </form>
     )

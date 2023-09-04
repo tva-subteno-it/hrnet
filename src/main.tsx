@@ -23,6 +23,7 @@ const router = createBrowserRouter([{
         {
             path: '/dropdown',
             element: <DropDown
+                id={"test"}
                 label={"Test Label"}
                 placeholder={"Test Button"}
                 items={[
@@ -33,8 +34,8 @@ const router = createBrowserRouter([{
                 ]}
                 multiSelect={true}
                 boxClass={"bg-[#eef0e5] w-52"}
-                boxStyle={{border: "1px solid rgba(40, 25, 14, 0.20)"}}
-                headerClass={"text-[#00000066]"}
+                boxStyle={{border: "1px solid rgb(40, 25, 14, .2)"}}
+                headerClass={"text-black text-opacity-50"}
                 listClass={"bg-[#eef0e5] w-52"}
             />,
         }

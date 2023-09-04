@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 interface ButtonProps {
     label: string;
     className?: string;
-    onClick: () => void;
+    onClick?: () => void;
     type?: "button" | "submit" | "link";
     to?: string;
 }
@@ -19,7 +19,7 @@ export default function Button({label, className = "", onClick, type="button", t
 
     if (type !== "link") {
         return (
-            <button type={type} onClick={onClick}
+            <button type={type} onClick={onClick ?? (() => {})}
                     className={"w-96 mx-auto bg-secondary text-white px-12 py-2 text-xl font-playfair block text-center rounded-sm" + className}>{label}</button>
         )
     }

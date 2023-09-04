@@ -6,6 +6,7 @@ interface DropDownProps {
         id: string;
         value: string;
     }[];
+    id: string;
     multiSelect?: boolean;
     displayArrow?: boolean;
     onSelectionChange?: (selected: string[]) => void;
@@ -23,10 +24,12 @@ interface DropDownProps {
     dropdownStyle?: React.CSSProperties;
     placeholder?: string;
     displayReset?: boolean;
+    position?: "top" | "bottom";
 }
 
 export default function DropDown({
                                      items,
+                                     id,
                                      multiSelect,
                                      displayArrow = true,
                                      onSelectionChange,
@@ -43,7 +46,8 @@ export default function DropDown({
                                      dropdownClass,
                                      dropdownStyle,
                                      placeholder,
-                                     displayReset = true
+                                     displayReset = true,
+                                     position = "bottom"
                                  }: DropDownProps) {
     const [open, setOpen] = useState(false);
     const [selection, setSelection] = useState<string[]>([]);
@@ -80,11 +84,12 @@ export default function DropDown({
 
     return (
         <div className={`dropdown_container ${dropdownClass}`} style={dropdownStyle && {...dropdownStyle}}>
+            <input id={id} name={id} type={"hidden"} value={selection.join(",")}/>
             {displayLabel && (
                 <p className={"text-sm font-pt mb-2"}>{label}</p>
             )}
             <div
-                className={`dropdown py-2 px-4 relative rounded-sm ${boxClass} hover:transition-colors hover:bg-black/10`}
+                className={`dropdown py-2 px-4 relative rounded-sm ${boxClass} hover:transition-colors hover:filter hover:bg-opacity-20`}
                 style={boxStyle && {...boxStyle}}
             >
                 <div
@@ -100,10 +105,10 @@ export default function DropDown({
                 </span>
                 </div>
                 {open && (
-                    <ul className={`dropdown__list max-h-96 overflow-auto border border-secondary/10 mt-2 z-10 absolute left-0 ${listClass}`}
+                    <ul className={`dropdown__list max-h-96 overflow-auto border border-secondary/10 mt-2 z-10 absolute left-0 ${listClass} ${position === "top" ? "bottom-full" : ""}`}
                         style={listStyle && {...listStyle}}>
                         {displayReset && (
-                            <li className={`dropdown__list__item p-2 border-t-2 border-secondary/10 ${itemClass} hover:transition-colors hover:bg-black/10`}
+                            <li className={`dropdown__list__item p-2 border-t-2 border-secondary/10 ${itemClass} hover:transition-colors hover:bg-opacity-10`}
                                 key={"reset"} style={itemStyle && {...itemStyle}}>
                                 <button type="button" onClick={() => {
                                     setSelection([]);
