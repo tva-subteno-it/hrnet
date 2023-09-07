@@ -16,7 +16,7 @@ export default function Form() {
         const data = Object.fromEntries(formData.entries());
         // add data to local storage
         const oldData = JSON.parse(window.localStorage.getItem("employee") ?? "[]");
-        window.localStorage.setItem("employee", JSON.stringify([...oldData, data]));
+        window.localStorage.setItem("employee", JSON.stringify([...oldData, {...data, uid: Math.random().toString(36).substring(2, 9)}]));
         setShowModal(true);
     }
 

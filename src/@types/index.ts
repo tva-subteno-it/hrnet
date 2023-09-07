@@ -8,4 +8,5 @@ export interface EmployeeInterface {
     city: string;
     state: string;
     zip: string;
+    uid: string;
 }
