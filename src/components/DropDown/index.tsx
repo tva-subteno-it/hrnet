@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import arrow from "../../assets/uil_arrow.svg";
+import {createPortal} from "react-dom";
 
 interface DropDownProps {
     items: {
@@ -57,6 +58,7 @@ export default function DropDown({
         throw new Error("Label is required when display_label is true")
     }
 
+
     const toggle = (item: string) => {
         if (selection.includes(item)) {
             setSelection(selection.filter(current => current !== item));
@@ -83,6 +85,11 @@ export default function DropDown({
     }, [selection, placeholder, items]);
 
     return (
+        <>
+            {createPortal(
+                <div className={`dropdown_backdrop inset-0 ${open ? "fixed" : "hidden"}`}
+                     onClick={() => setOpen(false)}/>, document.body)
+            }
         <div className={`dropdown_container ${dropdownClass}`} style={dropdownStyle && {...dropdownStyle}}>
             <input id={id} name={id} type={"hidden"} value={selection.join(",")}/>
             {displayLabel && (
@@ -135,5 +142,7 @@ export default function DropDown({
                     </ul>
                 )}
             </div>
-        </div>)
+        </div>
+        </>
+    )
 }
