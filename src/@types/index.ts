@@ -1,4 +1,5 @@
 export interface EmployeeInterface {
+    [key: string]: string;
     firstname: string;
     lastname: string;
     startDate: string;

@@ -39,12 +39,12 @@ export default function Form() {
                 <>
                     <Input id={"address"} placeholder={"2 rue de la paix"} groupClassName={"w-full"}/>
                     <Input id={"city"} placeholder={"Paris"} groupClassName={"w-full"}/>
-                    <Select id={"department"} label={"Department"} data={departments} placeholder={"Sales"}/>
+                    <Select id={"state"} label={"States"} data={states} placeholder={"Alabama"} position={"top"}/>
                     <Input id={"zip"} label={"ZIP"} type={"text"} placeholder={"35242"} groupClassName={"w-full"}/>
                 </>
             </FormGroup>
             <section className={"mt-14 px-[5vw]"}>
-                <Select id={"state"} label={"States"} data={states} placeholder={"Alabama"} position={"top"}/>
+                <Select id={"department"} label={"Department"} data={departments} placeholder={"Sales"}/>
             </section>
             <section className={"mt-20 mb-10 px-[5vw] w-full"}>
                 <Button type={"submit"} label={"Save"} className={"hover:filter hover:opacity-90 transition"}/>
