@@ -23,7 +23,6 @@ export interface AppContextInterface {
     }
     totalLength: {
         get: () => number,
-        set: Dispatch<SetStateAction<number>>
     },
 }
 

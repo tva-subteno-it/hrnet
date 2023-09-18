@@ -10,7 +10,40 @@ export default function Root() {
     const [entriesShown, setEntriesShown] = useState(5);
     const [searchQuery, setSearchQuery] = useState("");
     const [sortedColumn, setSortedColumn] = useState({});
-    const [totalLength, setTotalLength] = useState<number>(JSON.parse(localStorage.getItem("employee") ?? "[]").length);
+
+    const getEmployees = () => {
+        let employees = JSON.parse(window.localStorage.getItem("employee") ?? "[]") as EmployeeInterface[];
+        employees = employees.filter((employee: EmployeeInterface) => {
+            return Object.values(employee).some((value) => {
+                return value.toString().toLowerCase().includes(searchQuery?.toLowerCase() ?? "");
+            })
+        });
+        let newEmployees = [...employees];
+        for (const [key, value] of Object.entries<'asc' | 'desc' | '' | object>(sortedColumn)) {
+            if (value === 'asc') {
+                newEmployees = newEmployees.sort((a, b) => {
+                    if (a[key].toLowerCase() < b[key].toLowerCase()) {
+                        return -1;
+                    }
+                    if (a[key].toLowerCase() > b[key].toLowerCase()) {
+                        return 1;
+                    }
+                    return 0;
+                })
+            } else if (value === 'desc') {
+                newEmployees = newEmployees.sort((a, b) => {
+                    if (a[key].toLowerCase() > b[key].toLowerCase()) {
+                        return -1;
+                    }
+                    if (a[key].toLowerCase() < b[key].toLowerCase()) {
+                        return 1;
+                    }
+                    return 0;
+                })
+            }
+        }
+        return newEmployees
+    }
 
     const defaultContext = useMemo(() => ({
         showModal,
@@ -29,52 +62,18 @@ export default function Root() {
             },
         },
         employees: {
-            get: () => {
-                let employees = JSON.parse(localStorage.getItem("employee") ?? "[]");
-                employees = employees.filter((employee: EmployeeInterface) => {
-                    return Object.values(employee).some((value) => {
-                        return value.toString().toLowerCase().includes(searchQuery?.toLowerCase() ?? "");
-                    })
-                });
-                const start = (currentPage - 1) * entriesShown;
-                const end = start + entriesShown;
-                let newEmployees = [...employees];
-                for (const [key, value] of Object.entries<'asc' | 'desc' | '' | object>(sortedColumn)) {
-                    if (value === 'asc') {
-                        newEmployees = newEmployees.sort((a, b) => {
-                            if (a[key].toLowerCase() < b[key].toLowerCase()) {
-                                return -1;
-                            }
-                            if (a[key].toLowerCase() > b[key].toLowerCase()) {
-                                return 1;
-                            }
-                            return 0;
-                        })
-                    } else if (value === 'desc') {
-                        newEmployees = newEmployees.sort((a, b) => {
-                            if (a[key].toLowerCase() > b[key].toLowerCase()) {
-                                return -1;
-                            }
-                            if (a[key].toLowerCase() < b[key].toLowerCase()) {
-                                return 1;
-                            }
-                            return 0;
-                        })
-                    }
-                }
-                setTotalLength(newEmployees.length)
-                return newEmployees.slice(start, end)
-            }
+            get: ()=>getEmployees().slice((currentPage - 1) * entriesShown, currentPage * entriesShown),
         },
         sortedColumn: {
             get: sortedColumn,
             set: setSortedColumn,
         },
         totalLength: {
-            get: () => totalLength,
-            set: setTotalLength,
+            get: () => {
+                return getEmployees().length
+            }
         }
-    }), [showModal, currentPage, sortedColumn, entriesShown, searchQuery, totalLength]);
+    }), [showModal, currentPage, getEmployees, sortedColumn, entriesShown, searchQuery]);
 
     return (
         <AppContext.Provider value={defaultContext}>
