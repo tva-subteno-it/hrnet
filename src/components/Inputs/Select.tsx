@@ -1,4 +1,4 @@
-import DropDown from "../DropDown";
+import DropDown from "@redshark61/dropdown";
 
 interface SelectProps {
     label: string;

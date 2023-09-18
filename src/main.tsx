@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Home from "./pages/Home.tsx";
-import DropDown from "./components/DropDown";
+import DropDown from "@redshark61/dropdown";
 import Root from "./components/Root";
 import EmployeeList from "./pages/EmployeeList/EmployeeList.tsx";
 
