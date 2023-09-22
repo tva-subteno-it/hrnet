@@ -7,11 +7,12 @@ import React, {useContext, useState} from "react";
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
 import AppContext, {AppContextInterface} from "../../context";
+import {EmployeeInterface} from "../../@types";
 
 export default function Form() {
     const [startDate, setStartDate] = useState(new Date());
     const [birthDate, setBirthDate] = useState(new Date());
-    const {setShowModal} = useContext(AppContext) as AppContextInterface;
+    const {setShowModal, employees} = useContext(AppContext) as AppContextInterface;
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -21,13 +22,8 @@ export default function Form() {
             ...Object.fromEntries(formData.entries()),
             startDate: startDate.toLocaleDateString(),
             birth: birthDate.toLocaleDateString(),
-        };
-        // add data to local storage
-        const oldData = JSON.parse(window.localStorage.getItem("employee") ?? "[]");
-        window.localStorage.setItem("employee", JSON.stringify([...oldData, {
-            ...data,
-            uid: Math.random().toString(36).substring(2, 9)
-        }]));
+        } as EmployeeInterface;
+        employees.set((prevState) => [...prevState, {...data, uid: Math.random().toString(36).substring(2, 9)}])
         setShowModal(true);
     }
 

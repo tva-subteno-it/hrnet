@@ -16,6 +16,7 @@ export interface AppContextInterface {
     },
     employees: {
         get: () => EmployeeInterface[],
+        set: Dispatch<SetStateAction<EmployeeInterface[]>>
     },
     sortedColumn: {
         [key: string]: 'asc' | 'desc' | '' | object,
