@@ -15,7 +15,7 @@ export default function Form() {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log("Submitted")
+        // get the data and format the date as well as generate a uid
         const formData = new FormData(e.currentTarget);
         const data = {
             ...Object.fromEntries(formData.entries()),
@@ -45,17 +45,17 @@ export default function Form() {
                 <Input id={"firstname"} placeholder={"John"}/>
                 <Input id={"lastname"} placeholder={"Dupont"}/>
                 <Input label={"Start Date"} id={"start"}>
-                    <DatePicker id={"start"} dateFormat={"dd/MM/yyyy"} todayButton={"Today"} selected={startDate} placeholderText={"Start date"}
-                                   onChange={(date: Date) => setStartDate(date)}
-                                   className={"w-full border border-secondary/20 rounded-sm p-2 bg-primary bg-opacity-10 hover:filter hover:bg-opacity-20 transition"}/>
+                    <DatePicker id={"start"} dateFormat={"dd/MM/yyyy"} todayButton={"Today"} selected={startDate}
+                                placeholderText={"Start date"}
+                                onChange={(date: Date) => setStartDate(date)}
+                                className={"w-full border border-secondary/20 rounded-sm p-2 bg-primary bg-opacity-10 hover:filter hover:bg-opacity-20 transition"}/>
                 </Input>
                 <Input label={"Birth Date"} id={"birth"}>
                     <DatePicker id={"birth"} dateFormat={"dd/MM/yyyy"} todayButton={"Today"} selected={birthDate}
-                                                        placeholderText={"Birth date"}
-                                                        onChange={(date: Date) => setBirthDate(date)}
-                                                        className={"w-full border border-secondary/20 rounded-sm p-2 bg-primary bg-opacity-10 hover:filter hover:bg-opacity-20 transition"}/>
+                                placeholderText={"Birth date"}
+                                onChange={(date: Date) => setBirthDate(date)}
+                                className={"w-full border border-secondary/20 rounded-sm p-2 bg-primary bg-opacity-10 hover:filter hover:bg-opacity-20 transition"}/>
                 </Input>
-                <Input id={"startDate"} label={"Start date"} type={"date"} placeholder={"01/01/2001"}/>
             </section>
             <FormGroup label={"Address"} className={"mt-14 mx-[5vw]"}>
                 <>

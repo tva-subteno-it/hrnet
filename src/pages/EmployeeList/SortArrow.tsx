@@ -14,6 +14,7 @@ export function SortArrow({column}: SortArrowProps) {
     const {sortedColumn} = useContext(AppContext) as AppContextInterface
 
     const handleClick = () => {
+        // the idea here is to loop between 0, 1, 2 (not sorted, ascending, descending)
         switch (click) {
             case 0:
                 sortedColumn.set((prev) => ({...prev, [column]: ""}));

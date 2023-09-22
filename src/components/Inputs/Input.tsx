@@ -31,6 +31,7 @@ export default function Input({
         if (!id) {
             throw new Error("You must provide a label or children to the Input component")
         }
+        // the id can be used to generate a label (e.g. id="firstname" => label="Firstname")
         label = id.charAt(0).toUpperCase() + id.slice(1)
     }
 
@@ -40,7 +41,7 @@ export default function Input({
             {children ?? (<input name={id} type={type} id={id} placeholder={placeholder} value={inputValue}
                                  onChange={onChange ?? ((e) => setInputValue(e.target.value))}
                                  className={"border border-secondary/20 rounded-sm p-2 bg-primary bg-opacity-10 hover:filter hover:bg-opacity-20 transition" + inputClassName}/>
-                )}
+            )}
         </div>
     )
 }
