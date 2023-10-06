@@ -10,12 +10,19 @@ export default function Root() {
     const [entriesShown, setEntriesShown] = useState(5);
     const [searchQuery, setSearchQuery] = useState("");
     const [sortedColumn, setSortedColumn] = useState({});
-    const [employees, setEmployees] = useState<EmployeeInterface[]>([]);
 
     // memo to avoid re-rendering the method
     const defaultContext = useMemo(() => {
 
-        const getEmployees = () => {
+        const getEmployees = async () => {
+            const employees = await fetch('http://localhost:3000/users',
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                    }
+                }).then((res) => res.json()) as EmployeeInterface[]
             let newEmployees = employees.filter((employee: EmployeeInterface) => {
                 return Object.values(employee).some((value) => {
                     return value.toString().toLowerCase().includes(searchQuery?.toLowerCase() ?? "");
@@ -64,20 +71,18 @@ export default function Root() {
                 },
             },
             employees: {
-                get: () => getEmployees().slice((currentPage - 1) * entriesShown, currentPage * entriesShown),
-                set: setEmployees,
+                get: () => getEmployees().then((res) => res.slice((currentPage - 1) * entriesShown, currentPage * entriesShown)),
+                set: ()=>{},
             },
             sortedColumn: {
                 get: sortedColumn,
                 set: setSortedColumn,
             },
             totalLength: {
-                get: () => {
-                    return getEmployees().length
-                }
+                get: getEmployees().then((res) => res.length)
             }
         }
-    }, [showModal, currentPage, sortedColumn, employees, searchQuery, entriesShown]);
+    }, [showModal, currentPage, sortedColumn, searchQuery, entriesShown]);
 
     return (
         <AppContext.Provider value={defaultContext}>

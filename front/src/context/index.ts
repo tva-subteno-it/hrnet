@@ -15,7 +15,7 @@ export interface AppContextInterface {
         set: (query: string) => void
     },
     employees: {
-        get: () => EmployeeInterface[],
+        get: () => Promise<EmployeeInterface[]>,
         set: Dispatch<SetStateAction<EmployeeInterface[]>>
     },
     sortedColumn: {
@@ -23,7 +23,7 @@ export interface AppContextInterface {
         set: Dispatch<SetStateAction<{ [key: string]: string }>>,
     }
     totalLength: {
-        get: () => number,
+        get: Promise<number>,
     },
 }
 
