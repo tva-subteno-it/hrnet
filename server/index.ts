@@ -16,7 +16,11 @@ const server = Bun.serve({
             init_db();
             return new Response('Database initialized');
         } else if (path === '/users' && method === "GET"){
-            return new Response(JSON.stringify(read_table()), {headers: {"content-type": "application/json"}})
+            console.log("asked")
+            const res = new Response(JSON.stringify(read_table()))
+            res.headers.set("Content-Type", "application/json");
+            res.headers.set("Access-Control-Allow-Origin", "*");
+            return res;
         }
         return new Response('Not found', { status: 404 });
     }
